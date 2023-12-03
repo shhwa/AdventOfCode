@@ -24,9 +24,9 @@ public class Day3
     }
 
     [Test]
-    public void TokenizerGetsAllNumbersFromSchematic()
+    public void NumberTokenizerGetsAllNumbersFromSchematic()
     {
-        SchematicTokenizer schematicTokenizer = new SchematicTokenizer();
+        SchematicTokenizer schematicTokenizer = new SchematicNumberTokenizer();
         var result = schematicTokenizer.Tokenize("1.2345");
 
         Assert.That(result.First(), Is.TypeOf<NumberToken>());

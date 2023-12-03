@@ -7,7 +7,7 @@ public interface ISchematicTokenizer
     IEnumerable<Token> Tokenize(string schematic);
 }
 
-public class SchematicTokenizer : ISchematicTokenizer
+public abstract class SchematicTokenizer : ISchematicTokenizer
 {
     public IEnumerable<Token> Tokenize(string schematic)
     {
@@ -21,30 +21,28 @@ public class SchematicTokenizer : ISchematicTokenizer
             tokens.AddRange(
                 FindNumberTokens(lineCounter, line)
             );
-            
+
             lineCounter++;
         }
 
         return tokens;
     }
 
-    private static List<Token> FindNumberTokens(int lineCounter, string line)
+    private List<Token> FindNumberTokens(int lineCounter, string line)
     {
         var newTokens = new List<Token>();
 
-        var matches = Regex.Matches(line, @"\d+");
+        var matches = Regex.Matches(line, MatchPattern());
 
         foreach (Match match in matches)
         {
-            newTokens.Add(new NumberToken
-            {
-                Value = int.Parse(match.Value),
-                X = match.Index,
-                Y = lineCounter,
-                Length = match.Value.Length
-            });
+            newTokens.Add(CreateToken(lineCounter, match));
         }
 
         return newTokens;
     }
+
+    protected abstract string MatchPattern();
+
+    protected abstract NumberToken CreateToken(int lineCounter, Match match);
 }
