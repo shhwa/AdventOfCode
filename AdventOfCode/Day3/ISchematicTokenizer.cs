@@ -44,5 +44,5 @@ public abstract class SchematicTokenizer : ISchematicTokenizer
 
     protected abstract string MatchPattern();
 
-    protected abstract NumberToken CreateToken(int lineCounter, Match match);
+    protected abstract Token CreateToken(int lineCounter, Match match);
 }

@@ -52,6 +52,23 @@ public class Day3
         Assert.That(((NumberToken)result[3]).Value, Is.EqualTo(3456));
     }
 
+    [Test]
+    public void SymbolTokenizerGetsAllSymbolsFromSchematic()
+    {
+        SchematicTokenizer schematicTokenizer = new SchematicSymbolTokenizer();
+        var result = schematicTokenizer.Tokenize(
+            "$.123£\n"
+            + "$.123%*\n"
+        ).ToList();
+
+        Assert.That(result[0], Is.TypeOf<SymbolToken>());
+        Assert.That(((SymbolToken)result[0]).Value, Is.EqualTo("$"));
+        Assert.That(((SymbolToken)result[1]).Value, Is.EqualTo("£"));
+        Assert.That(((SymbolToken)result[2]).Value, Is.EqualTo("$"));
+        Assert.That(((SymbolToken)result[3]).Value, Is.EqualTo("%"));
+        Assert.That(((SymbolToken)result[4]).Value, Is.EqualTo("*"));
+    }
+
     public string ExampleSchematic = @"467..114..
 ...*......
 ..35..633.

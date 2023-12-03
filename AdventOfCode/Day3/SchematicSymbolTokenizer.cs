@@ -2,21 +2,21 @@ using System.Text.RegularExpressions;
 
 namespace AdventOfCode;
 
-public class SchematicNumberTokenizer : SchematicTokenizer
+public class SchematicSymbolTokenizer : SchematicTokenizer
 {
-    protected override string MatchPattern()
-    {
-        return @"\d+";
-    }
-
     protected override Token CreateToken(int lineCounter, Match match)
     {
-        return new NumberToken
+        return new SymbolToken
         {
-            Value = int.Parse(match.Value),
+            Value = match.Value,
             X = match.Index,
             Y = lineCounter,
             Length = match.Value.Length
         };
+    }
+
+    protected override string MatchPattern()
+    {
+        return @"[^\w\.\n]";
     }
 }

@@ -11,3 +11,8 @@ public class NumberToken : Token
 {
     public int Value { get; set; }
 }
+
+public class SymbolToken : Token
+{
+    public string Value { get; set; }
+}
