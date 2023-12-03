@@ -4,20 +4,20 @@ namespace AdventOfCode;
 public class GameEvaluator
 {
     private readonly IGameInterpreter gameInterpreter;
-    private readonly IGameValidator gameValidator;
+    private readonly IGameAnalyser gameAnalyser;
     private readonly IGameCombiner gameCombiner;
-    public GameEvaluator(IGameInterpreter gameInterpreter, IGameValidator gameValidator, IGameCombiner gameCombiner)
+    public GameEvaluator(IGameInterpreter gameInterpreter, IGameAnalyser gameValidator, IGameCombiner gameCombiner)
     {
         this.gameInterpreter = gameInterpreter;
-        this.gameValidator = gameValidator;
+        this.gameAnalyser = gameValidator;
         this.gameCombiner = gameCombiner;
     }
 
     public int Evaluate(string exampleData, Bag bag)
     {
         var games = gameInterpreter.ReadGames(exampleData);
-        var validGames = games.Select(g => gameValidator.Validate(g, bag));
-        var result = gameCombiner.CombineGames(validGames);
+        var analysedGames = games.Select(g => gameAnalyser.Analyse(g, bag));
+        var result = gameCombiner.CombineGames(analysedGames);
 
         return result;
     }

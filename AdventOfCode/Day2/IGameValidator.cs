@@ -1,16 +1,16 @@
 
 namespace AdventOfCode;
 
-public interface IGameValidator
+public interface IGameAnalyser
 {
-    ValidatedGame Validate(Game game, Bag bag);
+    AnalysedGame Analyse(Game game, Bag bag);
 }
 
-public class GameValidator : IGameValidator
+public class GameValidator : IGameAnalyser
 {
-    public ValidatedGame Validate(Game game, Bag bag)
+    public AnalysedGame Analyse(Game game, Bag bag)
     {
-        return new ValidatedGame
+        return new AnalysedGame
         {
             Draws = game.Draws,
             Id = game.Id,
