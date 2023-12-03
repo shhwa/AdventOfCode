@@ -1,3 +1,4 @@
+using System.Security.AccessControl;
 using FakeItEasy;
 using NUnit.Framework.Constraints;
 
@@ -157,6 +158,27 @@ public class Day2
         };
 
         Assert.That(evaluator.Evaluate(Data, bag), Is.EqualTo(2156));
+    }
+
+    [Test]
+    public void GameBagMinimiserAnalysesTheMinimumBagForAGame()
+    {
+        GameBagMinimiser gameBagMinimiser = new GameBagMinimiser();
+
+        Draw draw1 = new Draw { NoRed = 2, NoGreen = 1, NoBlue = 1 };
+        Draw draw2 = new Draw { NoRed = 1, NoGreen = 2, NoBlue = 1 };
+        Draw draw3 = new Draw { NoRed = 1, NoGreen = 1, NoBlue = 2 };
+
+        List<Draw> draws = new List<Draw> { draw1, draw2, draw3 };
+
+        Game game = new Game { Draws = draws };
+        Bag bag = new Bag { NoRed = 1, NoGreen = 2, NoBlue = 2 };
+
+        var result = (BagMinimisedGame)gameBagMinimiser.Analyse(game, bag);
+
+        Assert.That(result.MinRed, Is.EqualTo(2));
+        Assert.That(result.MinGreen, Is.EqualTo(2));
+        Assert.That(result.MinBlue, Is.EqualTo(2));
     }
 
     public string ExampleData = @"Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
