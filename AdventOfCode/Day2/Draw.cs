@@ -6,6 +6,8 @@ namespace AdventOfCode;
 
 public class Draw
 {
+    public Draw() { }
+    
     public Draw(string drawPart)
     {
         Match redMatch = Regex.Match(drawPart, @"(\d+) red");
