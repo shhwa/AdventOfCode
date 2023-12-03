@@ -121,15 +121,32 @@ public class Day2
         Assert.That(result, Is.EqualTo(3));
     }
 
-    public string ExampleData = @"
-Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+    [Test]
+    public void Part1Example()
+    {
+        GameEvaluator evaluator = new GameEvaluator(
+            new GameInterpreter(), 
+            new GameValidator(), 
+            new GameCombiner()
+        );
+
+        Bag exampleBag = new Bag
+        {
+            NoRed = 12,
+            NoGreen = 13,
+            NoBlue = 14
+        };
+
+        Assert.That(evaluator.Evaluate(ExampleData, exampleBag), Is.EqualTo(8));
+    }
+
+    public string ExampleData = @"Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
 Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
 Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green";
 
-    public string Data = @"
-Game 1: 4 blue, 4 red, 16 green; 14 green, 5 red; 1 blue, 3 red, 5 green
+    public string Data = @"Game 1: 4 blue, 4 red, 16 green; 14 green, 5 red; 1 blue, 3 red, 5 green
 Game 2: 3 green, 8 red, 1 blue; 5 green, 6 blue; 4 green, 4 blue, 10 red; 2 green, 6 red, 4 blue; 8 red, 11 blue, 4 green; 10 red, 10 blue
 Game 3: 7 blue, 2 green; 9 blue, 2 green, 4 red; 5 blue, 2 red; 1 red, 1 green, 10 blue; 1 green, 5 blue, 1 red
 Game 4: 5 green, 4 blue, 15 red; 1 green, 5 blue, 2 red; 14 red, 3 blue, 2 green; 6 red, 12 green, 1 blue; 1 blue, 6 green, 16 red
