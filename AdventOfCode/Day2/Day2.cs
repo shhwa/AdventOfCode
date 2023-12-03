@@ -23,6 +23,63 @@ public class Day2
         Assert.That(gameEvaluator.Evaluate("Some data", bag), Is.EqualTo(5));
     }
 
+    [Test]
+    public void DrawShouldCountRedGreenAndBlue()
+    {
+        Draw draw = new Draw("1 blue, 2 red, 13 green");
+
+        Assert.That(draw.NoBlue, Is.EqualTo(1));
+        Assert.That(draw.NoRed, Is.EqualTo(2));
+        Assert.That(draw.NoGreen, Is.EqualTo(13));
+    }
+
+    [Test]
+    public void DrawShouldAllowNulls()
+    {
+        Draw draw = new Draw("");
+        
+        Assert.That(draw.NoBlue, Is.EqualTo(0));
+        Assert.That(draw.NoRed, Is.EqualTo(0));
+        Assert.That(draw.NoGreen, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void GameShouldCreateDrawsForEachPart()
+    {
+        Game game = new Game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue");
+
+        Assert.That(game.Draws.First().NoBlue, Is.EqualTo(3));
+        Assert.That(game.Draws.First().NoRed, Is.EqualTo(4));
+        Assert.That(game.Draws.First().NoGreen, Is.EqualTo(0));
+
+        Assert.That(game.Draws.Last().NoBlue, Is.EqualTo(6));
+        Assert.That(game.Draws.Last().NoRed, Is.EqualTo(1));
+        Assert.That(game.Draws.Last().NoGreen, Is.EqualTo(2));
+    }
+
+    [Test]
+    public void GameShouldCreateWithId()
+    {
+        Game game = new Game("Game 11: ");
+
+        Assert.That(game.Id, Is.EqualTo(11));
+    }
+
+    [Test]
+    public void GameInterpreterCreatesAGameFromStringInputWithOneGameAndOneDrawAndOneBall()
+    {
+        var gameInterpreter = new GameInterpreter();
+
+        var games = gameInterpreter.ReadGames("Game 1: 1 blue");
+
+        Game game = games.Single();
+        Draw draw = game.Draws.Single();
+        Assert.That(game.Id, Is.EqualTo(1));
+        Assert.That(draw.NoRed, Is.EqualTo(0));
+        Assert.That(draw.NoGreen, Is.EqualTo(0));
+        Assert.That(draw.NoBlue, Is.EqualTo(1));
+    }
+
     public string ExampleData = @"
 Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
