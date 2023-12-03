@@ -262,6 +262,22 @@ public class Day3
         Assert.That(ratio, Is.EqualTo(6));
     }
 
+    [Test]
+    public void Part2Example()
+    {
+        PartCounter partCounter = new PartCounter(
+            new List<SchematicTokenizer> { 
+                new SchematicNumberTokenizer(),  
+                new SchematicGearTokenizer()
+            }, 
+            new GearCountingTokenCombiner()
+        );
+
+        int result = partCounter.Count(ExampleSchematic);
+
+        Assert.That(result, Is.EqualTo(467835));
+    }
+
     private class TestNumberToken : NumberToken
     {
         public bool IsTouching { get; set;}
