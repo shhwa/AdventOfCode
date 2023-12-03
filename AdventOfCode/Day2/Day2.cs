@@ -108,6 +108,19 @@ public class Day2
         Assert.That(gameValidator.Validate(game, bag), Is.EqualTo(false));
     }
 
+    [Test]
+    public void GameCombinerSumsIdsOfGames()
+    {
+        GameCombiner gameCombiner = new GameCombiner();
+
+        var result = gameCombiner.CombineGames(new List<Game> {
+            new Game { Id = 1 },
+            new Game { Id = 2 }
+        });
+
+        Assert.That(result, Is.EqualTo(3));
+    }
+
     public string ExampleData = @"
 Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
