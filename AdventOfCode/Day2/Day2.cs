@@ -94,6 +94,20 @@ public class Day2
         Assert.That(gameValidator.Validate(game, bag), Is.EqualTo(true));
     }
 
+    [Test]
+    public void GameValidatorShouldDenyGamesWithADrawThatExceedsTheBallBag()
+    {
+        var gameValidator = new GameValidator();
+
+        Draw draw = new Draw { NoRed = 2, NoGreen = 2, NoBlue = 2 };
+        List<Draw> draws = new List<Draw> { draw };
+
+        Game game = new Game { Draws = draws };
+        Bag bag = new Bag { NoRed = 1, NoGreen = 2, NoBlue = 2 };
+
+        Assert.That(gameValidator.Validate(game, bag), Is.EqualTo(false));
+    }
+
     public string ExampleData = @"
 Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue

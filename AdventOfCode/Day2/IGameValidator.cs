@@ -10,6 +10,8 @@ public class GameValidator : IGameValidator
 {
     public bool Validate(Game game, Bag bag)
     {
-        return true;
+        return !game.Draws.Any(draw => draw.NoRed > bag.NoRed 
+                                    || draw.NoGreen > bag.NoGreen 
+                                    || draw.NoBlue > bag.NoBlue);
     }
 }
