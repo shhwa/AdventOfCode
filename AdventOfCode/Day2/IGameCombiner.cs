@@ -15,3 +15,13 @@ public class GameCombiner : IGameCombiner
             .Sum(g => g.Id);
     }
 }
+
+public class MinimumGameBagCombiner : IGameCombiner
+{
+    public int CombineGames(IEnumerable<AnalysedGame> games)
+    {
+        return games
+            .Select(g => g as BagMinimisedGame)
+            .Sum(g => g.MinRed * g.MinGreen * g.MinBlue);
+    }
+}

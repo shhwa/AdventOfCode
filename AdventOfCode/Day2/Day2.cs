@@ -181,6 +181,20 @@ public class Day2
         Assert.That(result.MinBlue, Is.EqualTo(2));
     }
 
+    [Test]
+    public void MiniumGameBagCombinerAddsThePowerOfBagsTogether()
+    {
+        MinimumGameBagCombiner minimumGameBagCombiner = new MinimumGameBagCombiner();
+
+        var result = minimumGameBagCombiner.CombineGames(new List<AnalysedGame>
+        {
+            new BagMinimisedGame { MinRed = 2, MinGreen = 2, MinBlue = 2},
+            new BagMinimisedGame { MinRed = 3, MinGreen = 3, MinBlue = 3}
+        });
+
+        Assert.That(result, Is.EqualTo((2*2*2) + (3*3*3)));
+    }
+
     public string ExampleData = @"Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
 Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
