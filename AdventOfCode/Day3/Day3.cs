@@ -202,6 +202,22 @@ public class Day3
         Assert.That(result, Is.EqualTo(540025));
     }
 
+    [Test]
+    public void GearTokenizerGetsAllGears()
+    {
+        SchematicTokenizer schematicTokenizer = new SchematicGearTokenizer();
+        var result = schematicTokenizer.Tokenize(
+              "3*....24" + Environment.NewLine
+            + ".......*"
+        ).ToList();
+
+        Assert.That(result[0], Is.TypeOf<GearToken>());
+        Assert.That(((GearToken)result[0]).X, Is.EqualTo(1));
+        Assert.That(((GearToken)result[0]).Y, Is.EqualTo(0));
+        Assert.That(((GearToken)result[1]).X, Is.EqualTo(7));
+        Assert.That(((GearToken)result[1]).Y, Is.EqualTo(1));
+    }
+
     private class TestNumberToken : NumberToken
     {
         public bool IsTouching { get; set;}

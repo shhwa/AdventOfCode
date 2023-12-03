@@ -8,6 +8,10 @@ public class Token
     public int Y { get; set; }
 }
 
+public class GearToken : Token
+{
+}
+
 public class NumberToken : Token
 {
     public int Value { get; set; }
