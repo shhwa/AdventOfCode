@@ -16,7 +16,7 @@ public class GameEvaluator
     public int Evaluate(string exampleData, Bag bag)
     {
         var games = gameInterpreter.ReadGames(exampleData);
-        var validGames = games.Where(g => gameValidator.Validate(g, bag));
+        var validGames = games.Select(g => gameValidator.Validate(g, bag));
         var result = gameCombiner.CombineGames(validGames);
 
         return result;

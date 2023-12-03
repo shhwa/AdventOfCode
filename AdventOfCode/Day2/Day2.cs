@@ -17,8 +17,8 @@ public class Day2
         Bag bag = new Bag();
 
         A.CallTo(() => gameInterpreter.ReadGames(A<string>.Ignored)).Returns(new List<Game> { new Game() });
-        A.CallTo(() => gameValidator.Validate(A<Game>.Ignored, bag)).Returns(true);
-        A.CallTo(() => gameCombiner.CombineGames(A<IEnumerable<Game>>.Ignored)).Returns(5);
+        A.CallTo(() => gameValidator.Validate(A<Game>.Ignored, bag)).Returns(new ValidatedGame { Valid = true });
+        A.CallTo(() => gameCombiner.CombineGames(A<IEnumerable<ValidatedGame>>.Ignored)).Returns(5);
 
         Assert.That(gameEvaluator.Evaluate("Some data", bag), Is.EqualTo(5));
     }
@@ -91,7 +91,7 @@ public class Day2
         Game game = new Game { Draws = draws };
         Bag bag = new Bag { NoRed = 2, NoGreen = 2, NoBlue = 2 };
 
-        Assert.That(gameValidator.Validate(game, bag), Is.EqualTo(true));
+        Assert.That(gameValidator.Validate(game, bag).Valid, Is.EqualTo(true));
     }
 
     [Test]
@@ -105,7 +105,7 @@ public class Day2
         Game game = new Game { Draws = draws };
         Bag bag = new Bag { NoRed = 1, NoGreen = 2, NoBlue = 2 };
 
-        Assert.That(gameValidator.Validate(game, bag), Is.EqualTo(false));
+        Assert.That(gameValidator.Validate(game, bag).Valid, Is.EqualTo(false));
     }
 
     [Test]
@@ -113,9 +113,9 @@ public class Day2
     {
         GameCombiner gameCombiner = new GameCombiner();
 
-        var result = gameCombiner.CombineGames(new List<Game> {
-            new Game { Id = 1 },
-            new Game { Id = 2 }
+        var result = gameCombiner.CombineGames(new List<ValidatedGame> {
+            new ValidatedGame { Id = 1, Valid = true },
+            new ValidatedGame { Id = 2, Valid = true }
         });
 
         Assert.That(result, Is.EqualTo(3));

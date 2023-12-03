@@ -3,13 +3,15 @@ namespace AdventOfCode;
 
 public interface IGameCombiner
 {
-    int CombineGames(IEnumerable<Game> games);
+    int CombineGames(IEnumerable<ValidatedGame> games);
 }
 
 public class GameCombiner : IGameCombiner
 {
-    public int CombineGames(IEnumerable<Game> games)
+    public int CombineGames(IEnumerable<ValidatedGame> games)
     {
-        return games.Sum(g => g.Id);
+        return games
+            .Where(g => g.Valid)
+            .Sum(g => g.Id);
     }
 }
