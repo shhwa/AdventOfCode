@@ -278,6 +278,22 @@ public class Day3
         Assert.That(result, Is.EqualTo(467835));
     }
 
+    [Test]
+    public void Part2()
+    {
+        PartCounter partCounter = new PartCounter(
+            new List<SchematicTokenizer> { 
+                new SchematicNumberTokenizer(),  
+                new SchematicGearTokenizer()
+            }, 
+            new GearCountingTokenCombiner()
+        );
+
+        int result = partCounter.Count(Schematic);
+
+        Assert.That(result, Is.EqualTo(84584891));
+    }
+
     private class TestNumberToken : NumberToken
     {
         public bool IsTouching { get; set;}
