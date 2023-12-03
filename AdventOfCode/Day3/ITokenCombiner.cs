@@ -19,3 +19,14 @@ public class TokenCombiner : ITokenCombiner
             .Sum(n => n.Value);
     }
 }
+
+public class GearCountingTokenCombiner : ITokenCombiner
+{
+    public int Combine(IEnumerable<Token> tokens)
+    {
+        var gears = tokens.OfType<GearToken>();
+        var numbers = tokens.OfType<NumberToken>();
+
+        return gears.Sum(g => g.GearRatio(numbers));
+    }
+}

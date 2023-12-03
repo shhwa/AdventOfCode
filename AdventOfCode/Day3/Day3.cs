@@ -218,6 +218,19 @@ public class Day3
         Assert.That(((GearToken)result[1]).Y, Is.EqualTo(1));
     }
 
+    [Test]
+    public void GearCountingTokenCombinerAddsUpAllGearRatios()
+    {
+        GearCountingTokenCombiner tokenCombiner = new GearCountingTokenCombiner();
+
+        var result = tokenCombiner.Combine(new List<Token> {
+            new TestGearToken { Length = 1, X = 2, Y = 3, TestGearRatio = 2 },
+            new TestGearToken { Length = 1, X = 2, Y = 4, TestGearRatio = 3 },
+        });
+
+        Assert.That(result, Is.EqualTo(5));
+    }
+
     private class TestNumberToken : NumberToken
     {
         public bool IsTouching { get; set;}
@@ -225,6 +238,16 @@ public class Day3
         public override bool IsTouchingAnyOf(IEnumerable<SymbolToken> symbols)
         {
             return IsTouching;
+        }
+    }
+
+    private class TestGearToken : GearToken
+    {
+        public int TestGearRatio { get; set;}
+
+        public override int GearRatio(IEnumerable<NumberToken> numbers)
+        {
+            return TestGearRatio;
         }
     }
 

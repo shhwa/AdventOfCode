@@ -10,6 +10,10 @@ public class Token
 
 public class GearToken : Token
 {
+    public virtual int GearRatio(IEnumerable<NumberToken> numbers)
+    {
+        return 0;
+    }
 }
 
 public class NumberToken : Token
