@@ -170,6 +170,22 @@ public class Day3
         Assert.That(numberToken.IsTouchingAnyOf(new []{ symbolToken }), Is.EqualTo(true));
     }
 
+    [Test]
+    public void Part1Example()
+    {
+        PartCounter partCounter = new PartCounter(
+            new List<SchematicTokenizer> { 
+                new SchematicNumberTokenizer(),  
+                new SchematicSymbolTokenizer() 
+            }, 
+            new TokenCombiner()
+        );
+
+        int result = partCounter.Count(ExampleSchematic);
+
+        Assert.That(result, Is.EqualTo(4361));
+    }
+
     private class TestNumberToken : NumberToken
     {
         public bool IsTouching { get; set;}
