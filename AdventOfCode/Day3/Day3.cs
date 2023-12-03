@@ -36,6 +36,22 @@ public class Day3
         Assert.That(((NumberToken)result.Last()).Value, Is.EqualTo(2345));
     }
 
+    [Test]
+    public void NumberTokenizerGetsAllNumbersFromSchematicInMultipleLines()
+    {
+        SchematicTokenizer schematicTokenizer = new SchematicNumberTokenizer();
+        var result = schematicTokenizer.Tokenize(
+            "1.2345\n"
+            + "2.3456"
+        ).ToList();
+
+        Assert.That(result[0], Is.TypeOf<NumberToken>());
+        Assert.That(((NumberToken)result[0]).Value, Is.EqualTo(1));
+        Assert.That(((NumberToken)result[1]).Value, Is.EqualTo(2345));
+        Assert.That(((NumberToken)result[2]).Value, Is.EqualTo(2));
+        Assert.That(((NumberToken)result[3]).Value, Is.EqualTo(3456));
+    }
+
     public string ExampleSchematic = @"467..114..
 ...*......
 ..35..633.
