@@ -11,7 +11,7 @@ public class Day3
         ISchematicTokenizer tokenizer = A.Fake<ISchematicTokenizer>();
         ITokenCombiner tokenCombiner = A.Fake<ITokenCombiner>();
 
-        PartCounter partCounter = new PartCounter(tokenizer, tokenCombiner);
+        PartCounter partCounter = new PartCounter(new [] { tokenizer }, tokenCombiner);
 
         var tokens = new List<Token>();
 
@@ -169,7 +169,6 @@ public class Day3
 
         Assert.That(numberToken.IsTouchingAnyOf(new []{ symbolToken }), Is.EqualTo(true));
     }
-
 
     private class TestNumberToken : NumberToken
     {
