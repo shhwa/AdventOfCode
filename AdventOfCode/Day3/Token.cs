@@ -14,7 +14,12 @@ public class NumberToken : Token
 
     public virtual bool IsTouchingAnyOf(IEnumerable<SymbolToken> symbols)
     {
-        throw new NotImplementedException();
+        return symbols.Any(
+            s => s.X >= X-1 
+              && s.X <= X + Length
+              && s.Y >= Y-1
+              && s.Y <= Y+1
+        );
     }
 }
 

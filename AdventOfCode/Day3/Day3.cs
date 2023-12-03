@@ -82,6 +82,95 @@ public class Day3
         Assert.That(result, Is.EqualTo(12));
     }
 
+    [Test]
+    public void NumberTokenEvaluatesWhetherItsTouchingAnySymbolWhenSymbolIsTopLeft()
+    {
+        NumberToken numberToken = new NumberToken
+        {
+            Length = 2,
+            Value = 12,
+            X = 5,
+            Y = 6
+        };
+
+        SymbolToken symbolToken = new SymbolToken
+        {
+            Length = 1,
+            Value = "%",
+            X = 4,
+            Y = 5
+        };
+
+        Assert.That(numberToken.IsTouchingAnyOf(new []{ symbolToken }), Is.EqualTo(true));
+    }
+
+    [Test]
+    public void NumberTokenEvaluatesWhetherItsTouchingAnySymbolWhenSymbolIsTopRight()
+    {
+        NumberToken numberToken = new NumberToken
+        {
+            Length = 2,
+            Value = 12,
+            X = 5,
+            Y = 6
+        };
+
+        SymbolToken symbolToken = new SymbolToken
+        {
+            Length = 1,
+            Value = "%",
+            X = 7,
+            Y = 5
+        };
+
+        Assert.That(numberToken.IsTouchingAnyOf(new []{ symbolToken }), Is.EqualTo(true));
+    }
+
+        [Test]
+    public void NumberTokenEvaluatesWhetherItsTouchingAnySymbolWhenSymbolIsBottomLeft()
+    {
+        NumberToken numberToken = new NumberToken
+        {
+            Length = 2,
+            Value = 12,
+            X = 5,
+            Y = 6
+        };
+
+        SymbolToken symbolToken = new SymbolToken
+        {
+            Length = 1,
+            Value = "%",
+            X = 4,
+            Y = 7
+        };
+
+        Assert.That(numberToken.IsTouchingAnyOf(new []{ symbolToken }), Is.EqualTo(true));
+    }
+
+    [Test]
+    public void NumberTokenEvaluatesWhetherItsTouchingAnySymbolWhenSymbolIsBottomRight()
+    {
+        NumberToken numberToken = new NumberToken
+        {
+            Length = 2,
+            Value = 12,
+            X = 5,
+            Y = 6
+        };
+
+        SymbolToken symbolToken = new SymbolToken
+        {
+            Length = 1,
+            Value = "%",
+            X = 7,
+            Y = 7
+        };
+
+        Assert.That(numberToken.IsTouchingAnyOf(new []{ symbolToken }), Is.EqualTo(true));
+    }
+
+
     private class TestNumberToken : NumberToken
     {
         public bool IsTouching { get; set;}
