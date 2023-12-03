@@ -12,6 +12,18 @@ public class GearToken : Token
 {
     public virtual int GearRatio(IEnumerable<NumberToken> numbers)
     {
+        var touchingNumbers = numbers.Where(
+            s => s.X + s.Length - 1 >= X-1 
+              && s.X <= X+1
+              && s.Y >= Y-1
+              && s.Y <= Y+1
+        );
+
+        if (touchingNumbers.Count() == 2)
+        {
+            return touchingNumbers.First().Value * touchingNumbers.Last().Value;
+        }
+
         return 0;
     }
 }

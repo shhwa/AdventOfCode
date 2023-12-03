@@ -231,6 +231,37 @@ public class Day3
         Assert.That(result, Is.EqualTo(5));
     }
 
+    [Test]
+    public void GearTokenShouldCalculateGearRatioWhenTouching2Numbers()
+    {
+        GearToken gearToken = new GearToken
+        {
+            Length = 1,
+            X = 5,
+            Y = 5
+        };
+
+        NumberToken number1 = new NumberToken
+        {
+            Value = 2,
+            Length = 3,
+            X = 3,
+            Y = 4
+        };
+
+        NumberToken number2 = new NumberToken
+        {
+            Value = 3,
+            Length = 1,
+            X = 4,
+            Y = 6
+        };
+
+        var ratio = gearToken.GearRatio(new [] { number1, number2 });
+
+        Assert.That(ratio, Is.EqualTo(6));
+    }
+
     private class TestNumberToken : NumberToken
     {
         public bool IsTouching { get; set;}
