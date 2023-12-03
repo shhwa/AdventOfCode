@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using FakeItEasy;
 
 namespace AdventOfCode;
@@ -20,6 +21,19 @@ public class Day3
         int result = partCounter.Count(ExampleSchematic);
 
         Assert.That(result, Is.EqualTo(5));
+    }
+
+    [Test]
+    public void TokenizerGetsAllNumbersFromSchematic()
+    {
+        SchematicTokenizer schematicTokenizer = new SchematicTokenizer();
+        var result = schematicTokenizer.Tokenize("1.2345");
+
+        Assert.That(result.First(), Is.TypeOf<NumberToken>());
+        Assert.That(((NumberToken)result.First()).Value, Is.EqualTo(1));
+
+        Assert.That(result.Last(), Is.TypeOf<NumberToken>());
+        Assert.That(((NumberToken)result.Last()).Value, Is.EqualTo(2345));
     }
 
     public string ExampleSchematic = @"467..114..
