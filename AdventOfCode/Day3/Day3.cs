@@ -69,6 +69,29 @@ public class Day3
         Assert.That(((SymbolToken)result[4]).Value, Is.EqualTo("*"));
     }
 
+    [Test]
+    public void TokenCombinerSumsNumberTokensAdjacentToSymbolTokensWhenThereIsOneNumberAndOneSymbol()
+    {
+        var tokenCombiner = new TokenCombiner();
+
+        var result = tokenCombiner.Combine(new List<Token> {
+            new TestNumberToken { Value = 12, Length = 2, X = 2, Y = 3, IsTouching = true },
+            new TestNumberToken { Value = 9, Length = 2, X = 2, Y = 4, IsTouching = false },
+        });
+
+        Assert.That(result, Is.EqualTo(12));
+    }
+
+    private class TestNumberToken : NumberToken
+    {
+        public bool IsTouching { get; set;}
+
+        public override bool IsTouchingAnyOf(IEnumerable<SymbolToken> symbols)
+        {
+            return IsTouching;
+        }
+    }
+
     public string ExampleSchematic = @"467..114..
 ...*......
 ..35..633.

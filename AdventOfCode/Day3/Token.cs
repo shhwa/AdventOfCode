@@ -1,3 +1,4 @@
+
 namespace AdventOfCode;
 
 public class Token
@@ -10,6 +11,11 @@ public class Token
 public class NumberToken : Token
 {
     public int Value { get; set; }
+
+    public virtual bool IsTouchingAnyOf(IEnumerable<SymbolToken> symbols)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public class SymbolToken : Token
