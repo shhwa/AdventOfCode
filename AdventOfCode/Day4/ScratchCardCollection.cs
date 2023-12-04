@@ -26,7 +26,10 @@ public class ScratchCardCollection
 
             foreach(var index in Enumerable.Range(scratchCardList.IndexOf(scratchCard)+1, numberOfCardsToCopy))
             {
-                scratchCardList[index].Copies += scratchCard.Copies;
+                if (index < scratchCardList.Count)
+                {
+                    scratchCardList[index].Copies += scratchCard.Copies;
+                }
             }
         }
 
