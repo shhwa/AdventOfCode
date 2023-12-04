@@ -12,9 +12,9 @@ public class ScratchCardCollection
         this.scratchCardList = scratchCardList.ToList();
     }
 
-    public int TotalScratchCards => CountScratchCards();
+    public int TotalScratchCards => scratchCardList.Sum(x => x.Copies);
 
-    private int CountScratchCards()
+    public void MakeCopiesOfScratchCards()
     {
         foreach(var scratchCard in scratchCardList)
         {
@@ -32,8 +32,6 @@ public class ScratchCardCollection
                 }
             }
         }
-
-        return scratchCardList.Sum(x => x.Copies);
     }
 
     public virtual int TotalScore => scratchCardList.Sum(x => x.Score);

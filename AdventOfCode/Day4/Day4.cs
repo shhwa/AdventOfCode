@@ -115,6 +115,7 @@ Card 2: 9  10 11 | 12  31 14 15");
             new ScratchCard("Card 2: 1 | 2"),
             new ScratchCard("Card 3: 1 | 2"),
         });
+        result.MakeCopiesOfScratchCards();
 
         Assert.That(result.TotalScratchCards, Is.EqualTo(3));
     }
@@ -127,6 +128,7 @@ Card 2: 9  10 11 | 12  31 14 15");
             new ScratchCard("Card 2: 1 | 2"),
             new ScratchCard("Card 3: 1 | 2"),
         });
+        result.MakeCopiesOfScratchCards();
 
         Assert.That(result.TotalScratchCards, Is.EqualTo(4));
     }
@@ -139,6 +141,7 @@ Card 2: 9  10 11 | 12  31 14 15");
             new ScratchCard("Card 2: 1 | 1"),
             new ScratchCard("Card 3: 1 | 2"),
         });
+        result.MakeCopiesOfScratchCards();
 
         Assert.That(result.TotalScratchCards, Is.EqualTo(6));
     }
@@ -152,6 +155,7 @@ Card 2: 9  10 11 | 12  31 14 15");
             new ScratchCard("Card 3: 1 | 1"),
             new ScratchCard("Card 3: 1 | 2"),
         });
+        result.MakeCopiesOfScratchCards();
 
         Assert.That(result.TotalScratchCards, Is.EqualTo(10));
     }
@@ -165,6 +169,7 @@ Card 2: 9  10 11 | 12  31 14 15");
         );
 
         var result = scratchCardCounter.Count(ExampleData);
+        result.MakeCopiesOfScratchCards();
 
         Assert.That(result.TotalScratchCards, Is.EqualTo(30));
     }
@@ -178,6 +183,7 @@ Card 2: 9  10 11 | 12  31 14 15");
         );
 
         var result = scratchCardCounter.Count(Data);
+        result.MakeCopiesOfScratchCards();
 
         Assert.That(result.TotalScratchCards, Is.EqualTo(5329815));
     }
