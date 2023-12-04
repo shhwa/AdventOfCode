@@ -12,7 +12,7 @@ public class ScratchCardCollection
         this.scratchCardList = scratchCardList.ToList();
     }
 
-    public int TotalScratchCards => scratchCardList.Where(x => x.Score == 0).Count();
+    public int TotalScratchCards => scratchCardList.Count() + scratchCardList.Sum(s => s.Score);
 
     public virtual int TotalScore => scratchCardList.Sum(x => x.Score);
 }
