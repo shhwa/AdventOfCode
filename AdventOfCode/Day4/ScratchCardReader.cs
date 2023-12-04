@@ -9,6 +9,7 @@ public class ScratchCardReader : IScratchCardReader
 
     public IEnumerable<ScratchCard> Read(string exampleData)
     {
-        throw new NotImplementedException();
+        return exampleData.Split(Environment.NewLine)
+            .Select(x => new ScratchCard(x));
     }
 }
