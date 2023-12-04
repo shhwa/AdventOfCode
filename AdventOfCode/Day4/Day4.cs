@@ -16,15 +16,12 @@ public class Day4
         );
 
         var scratchCardList = new List<ScratchCard>();
-        var scratchCardCollection = new ScratchCardCollection
-        {
-            TotalScore = 5
-        };
+        var scratchCardCollection = A.Fake<ScratchCardCollection>();
 
         A.CallTo(() => scratchCardReader.Read(ExampleData)).Returns(scratchCardList);
         A.CallTo(() => scratchCardCollector.Collect(scratchCardList)).Returns(scratchCardCollection);
 
-        Assert.That(scratchCardCounter.Count(ExampleData).TotalScore, Is.EqualTo(5));
+        Assert.That(scratchCardCounter.Count(ExampleData), Is.EqualTo(scratchCardCollection));
     }
 
     [Test]
@@ -56,6 +53,19 @@ public class Day4
 Card 2: 9  10 11 | 12  31 14 15");
 
         Assert.That(cards.Count(), Is.EqualTo(2));
+    }
+
+    [Test]
+    public void CardCollectorShouldCreateACollectionWithTotalScore()
+    {
+        ScratchCardCollector scratchCardCollector = new ScratchCardCollector();
+
+        var collection = scratchCardCollector.Collect(new List<ScratchCard> {
+            new ScratchCard { PlayedNumbers = new [] { 1, 2, 3}, WinningNumbers = new [] { 1, 5, 6 }, Score = 2 },
+            new ScratchCard { PlayedNumbers = new [] { 1, 2, 3}, WinningNumbers = new [] { 1, 2, 6 }, Score = 4 }
+        });
+
+        Assert.That(collection.TotalScore, Is.EqualTo(6));
     }
 
     public string ExampleData = @"Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53

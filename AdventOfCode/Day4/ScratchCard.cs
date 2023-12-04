@@ -4,9 +4,11 @@ namespace AdventOfCode;
 
 public class ScratchCard
 {
-    public ScratchCard(string x)
+    public ScratchCard() {}
+    
+    public ScratchCard(string cardString)
     {
-        var parts = x.Replace("Card", "")
+        var parts = cardString.Replace("Card", "")
             .Split(":");
 
         var numberParts = parts[1].Split("|");
@@ -22,4 +24,5 @@ public class ScratchCard
     public IEnumerable<int> WinningNumbers { get; set; }
 
     public IEnumerable<int> PlayedNumbers { get; set; }
+    public int Score { get; internal set; }
 }

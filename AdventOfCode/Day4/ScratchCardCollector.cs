@@ -9,6 +9,6 @@ public class ScratchCardCollector : IScratchCardCollector
 
     public ScratchCardCollection Collect(IEnumerable<ScratchCard> scratchCardList)
     {
-        throw new NotImplementedException();
+        return new ScratchCardCollection(scratchCardList);
     }
 }

@@ -1,8 +1,16 @@
+
 namespace AdventOfCode;
 
 public class ScratchCardCollection
 {
+    private IEnumerable<ScratchCard> scratchCardList;
+
     public ScratchCardCollection() { }
 
-    public int TotalScore { get; set; }
+    public ScratchCardCollection(IEnumerable<ScratchCard> scratchCardList)
+    {
+        this.scratchCardList = scratchCardList;
+    }
+
+    public virtual int TotalScore => scratchCardList.Sum(x => x.Score);
 }
