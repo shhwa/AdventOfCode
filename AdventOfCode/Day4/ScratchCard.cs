@@ -27,6 +27,8 @@ public class ScratchCard
 
     public int Score => CountWinningNumbers() == 0 ? 0 : (int)Math.Pow(2, CountWinningNumbers() - 1);
 
+    public int NumberOfWinningNumbers => CountWinningNumbers();
+
     private int CountWinningNumbers()
     {
         return PlayedNumbers.Where(x => WinningNumbers.Contains(x)).Count();
