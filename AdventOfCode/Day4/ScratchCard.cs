@@ -4,8 +4,8 @@ namespace AdventOfCode;
 
 public class ScratchCard
 {
-    public ScratchCard() {}
-    
+    public ScratchCard() { }
+
     public ScratchCard(string cardString)
     {
         var parts = cardString.Replace("Card", "")
@@ -24,5 +24,11 @@ public class ScratchCard
     public IEnumerable<int> WinningNumbers { get; set; }
 
     public IEnumerable<int> PlayedNumbers { get; set; }
-    public int Score { get; internal set; }
+
+    public int Score => CountWinningNumbers() == 0 ? 0 : (int)Math.Pow(2, CountWinningNumbers() - 1);
+
+    private int CountWinningNumbers()
+    {
+        return PlayedNumbers.Where(x => WinningNumbers.Contains(x)).Count();
+    }
 }

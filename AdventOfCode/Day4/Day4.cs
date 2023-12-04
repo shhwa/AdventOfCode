@@ -61,11 +61,23 @@ Card 2: 9  10 11 | 12  31 14 15");
         ScratchCardCollector scratchCardCollector = new ScratchCardCollector();
 
         var collection = scratchCardCollector.Collect(new List<ScratchCard> {
-            new ScratchCard { PlayedNumbers = new [] { 1, 2, 3}, WinningNumbers = new [] { 1, 5, 6 }, Score = 2 },
-            new ScratchCard { PlayedNumbers = new [] { 1, 2, 3}, WinningNumbers = new [] { 1, 2, 6 }, Score = 4 }
+            new ScratchCard { PlayedNumbers = new [] { 1, 2, 3}, WinningNumbers = new [] { 1, 2, 6 } },
+            new ScratchCard { PlayedNumbers = new [] { 1, 2, 3}, WinningNumbers = new [] { 1, 2, 3 } }
         });
 
         Assert.That(collection.TotalScore, Is.EqualTo(6));
+    }
+
+    [TestCase("Card 1: 1 | 2", 0)]
+    [TestCase("Card 1: 1 | 1", 1)]
+    [TestCase("Card 1: 1 2 | 1", 1)]
+    [TestCase("Card 1: 1 2 | 1 2", 2)]
+    [TestCase("Card 1: 1 2 3 | 1 2 3", 4)]
+    public void ScratchCardShouldCalculateScore(string cardString, int expectedScore)
+    {
+        ScratchCard scratchCard = new ScratchCard(cardString);
+
+        Assert.That(scratchCard.Score, Is.EqualTo(expectedScore));
     }
 
     public string ExampleData = @"Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
