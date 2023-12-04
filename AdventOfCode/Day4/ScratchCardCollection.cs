@@ -19,21 +19,21 @@ public class ScratchCardCollection
         var si = 0;
         var scratchCardCopyCounter = scratchCardList.ToDictionary(x => si++, x => 1);
 
-        for(int scratchCardIndex = 0; scratchCardIndex < scratchCardList.Count; scratchCardIndex++)
+        foreach(var scratchCard in scratchCardList)
         {
-            var score = scratchCardList[scratchCardIndex].NumberOfWinningNumbers;
-
-            for (int copyingCardIndex = 1; copyingCardIndex <= score; copyingCardIndex++)
+            var numberOfCardsToCopy = scratchCard.NumberOfWinningNumbers;
+            if (numberOfCardsToCopy == 0)
             {
-                if (scratchCardCopyCounter.Count > scratchCardIndex + copyingCardIndex)
-                {
-                    scratchCardCopyCounter[scratchCardIndex+copyingCardIndex] += scratchCardCopyCounter[scratchCardIndex];
-                }
+                continue;
             }
-            
+
+            foreach(var index in Enumerable.Range(scratchCardList.IndexOf(scratchCard)+1, numberOfCardsToCopy))
+            {
+                scratchCardList[index].Copies += scratchCard.Copies;
+            }
         }
 
-        return scratchCardCopyCounter.Sum(x => x.Value);
+        return scratchCardList.Sum(x => x.Copies);
     }
 
     public virtual int TotalScore => scratchCardList.Sum(x => x.Score);
