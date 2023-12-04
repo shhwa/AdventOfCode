@@ -16,9 +16,6 @@ public class ScratchCardCollection
 
     private int CountScratchCards()
     {
-        var si = 0;
-        var scratchCardCopyCounter = scratchCardList.ToDictionary(x => si++, x => 1);
-
         foreach(var scratchCard in scratchCardList)
         {
             var numberOfCardsToCopy = scratchCard.NumberOfWinningNumbers;
