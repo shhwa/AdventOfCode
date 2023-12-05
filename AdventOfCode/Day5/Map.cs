@@ -17,7 +17,7 @@ namespace AdventOfCode.Day5
             var ranges = parts.Skip(1).Select(p => {
                 var rangeParts = p.Split(" ").Select(x => int.Parse(x)).ToList();
 
-                return new Range(rangeParts[0], rangeParts[1], rangeParts[2]);
+                return new Range(rangeParts[1], rangeParts[0], rangeParts[2]);
             });
 
             return new Map(AttributeToOutput, attributeToRead, ranges);

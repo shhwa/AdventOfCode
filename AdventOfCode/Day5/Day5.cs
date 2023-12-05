@@ -92,9 +92,28 @@ namespace AdventOfCode.Day5
             Assert.That(map.AttributeToOutput, Is.EqualTo("soil"));
             Assert.That(map.AttributeToRead, Is.EqualTo("seed"));
             Assert.That(map.ranges.Count(), Is.EqualTo(2));
-            Assert.That(map.ranges.First().source, Is.EqualTo(50));
-            Assert.That(map.ranges.First().destination, Is.EqualTo(98));
+            Assert.That(map.ranges.First().source, Is.EqualTo(98));
+            Assert.That(map.ranges.First().destination, Is.EqualTo(50));
             Assert.That(map.ranges.First().length, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void AttributerShouldCreatePolicy()
+        {
+            ISeedAttributer seedAttributer = new SeedAttributer();
+
+            var policy = seedAttributer.CreatePolicy(
+@"seed-to-first map:
+2 1 2
+
+first-to-second map:
+3 2 2"    );
+
+            var seed = new Seed(1);
+            policy.AddAttributes(seed);
+
+            Assert.That(seed.GetAttributeValue("first"), Is.EqualTo(2));
+            Assert.That(seed.GetAttributeValue("second"), Is.EqualTo(3));
         }
     }
 }
