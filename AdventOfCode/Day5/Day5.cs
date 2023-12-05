@@ -61,5 +61,29 @@ namespace AdventOfCode.Day5
 
             Assert.That(bestSeed, Is.EqualTo(seed1));
         }
+
+        [Test]
+        public void SeedAttributePolicyShouldApplyAttributes()
+        {
+            Map map1 = new Map("first", "seed", new Dictionary<int, int> {
+                { 1, 2 },
+                { 2, 3 }
+            });
+
+            Map map2 = new Map("second", "first", new Dictionary<int, int> {
+                { 2, 3 },
+                { 3, 4 }
+            });
+
+            ISeedAttributePolicy seedAttributePolicy = new MappingSeedAttributePolicy(new [ ]{ map1, map2 });
+
+            var seed = new Seed(1);
+
+            seedAttributePolicy.AddAttributes(seed);
+
+            Assert.That(seed.Attributes.Count(), Is.EqualTo(3));
+            Assert.That(seed.GetAttributeValue("first"), Is.EqualTo(2));
+            Assert.That(seed.GetAttributeValue("second"), Is.EqualTo(3));
+        }
     }
 }
