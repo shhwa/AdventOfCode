@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using FakeItEasy;
 
 namespace AdventOfCode.Day5
@@ -65,15 +66,9 @@ namespace AdventOfCode.Day5
         [Test]
         public void SeedAttributePolicyShouldApplyAttributes()
         {
-            Map map1 = new Map("first", "seed", new Dictionary<int, int> {
-                { 1, 2 },
-                { 2, 3 }
-            });
+            Map map1 = new Map("first", "seed", new [] { new Range(1, 2, 100) });
 
-            Map map2 = new Map("second", "first", new Dictionary<int, int> {
-                { 2, 3 },
-                { 3, 4 }
-            });
+            Map map2 = new Map("second", "first", new [] { new Range(1, 2, 100) });
 
             ISeedAttributePolicy seedAttributePolicy = new MappingSeedAttributePolicy(new [ ]{ map1, map2 });
 
@@ -84,6 +79,22 @@ namespace AdventOfCode.Day5
             Assert.That(seed.Attributes.Count(), Is.EqualTo(3));
             Assert.That(seed.GetAttributeValue("first"), Is.EqualTo(2));
             Assert.That(seed.GetAttributeValue("second"), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void MapShouldCreateFromString()
+        {
+            Map map = Map.Parse(@"seed-to-soil map:
+50 98 2
+52 50 48");
+            
+            
+            Assert.That(map.AttributeToOutput, Is.EqualTo("soil"));
+            Assert.That(map.AttributeToRead, Is.EqualTo("seed"));
+            Assert.That(map.ranges.Count(), Is.EqualTo(2));
+            Assert.That(map.ranges.First().source, Is.EqualTo(50));
+            Assert.That(map.ranges.First().destination, Is.EqualTo(98));
+            Assert.That(map.ranges.First().length, Is.EqualTo(2));
         }
     }
 }
