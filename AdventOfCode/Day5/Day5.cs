@@ -11,7 +11,7 @@ namespace AdventOfCode.Day5
             ISeedAttributer seedAttributer = A.Fake<ISeedAttributer>();
             ISeedAttributePolicy seedAttributePolicy = A.Fake<ISeedAttributePolicy>();
             IBestSeedFinder bestSeedFinder = A.Fake<IBestSeedFinder>();
-            
+
             SeedSelector seedSelector = new SeedSelector(
                 seedReader,
                 seedAttributer,
@@ -33,6 +33,18 @@ namespace AdventOfCode.Day5
             A.CallTo(() => seedAttributePolicy.AddAttributes(seed1)).MustHaveHappened();
             A.CallTo(() => seedAttributePolicy.AddAttributes(seed2)).MustHaveHappened();
             Assert.That(selectedSeed, Is.EqualTo(seed1));
+        }
+
+        [Test]
+        public void SeedReaderShouldReadSeeds()
+        {
+            ISeedReader seedReader = new SeedReader();
+
+            var seeds = seedReader.Read("seeds: 79 14 55 13");
+
+            Assert.That(seeds.Count(), Is.EqualTo(4));
+            Assert.That(seeds.First().Id, Is.EqualTo(79));
+            Assert.That(seeds.Last().Id, Is.EqualTo(13));
         }
     }
 }
