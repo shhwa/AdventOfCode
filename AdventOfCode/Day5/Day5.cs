@@ -46,5 +46,20 @@ namespace AdventOfCode.Day5
             Assert.That(seeds.First().Id, Is.EqualTo(79));
             Assert.That(seeds.Last().Id, Is.EqualTo(13));
         }
+
+        [Test]
+        public void BestSeedFinderShouldFindClosestSeed()
+        {
+            IBestSeedFinder bestSeedFinder = new ClosestSeedFinder();
+            var seed1 = new Seed(1);
+            var seed2 = new Seed(2);
+
+            seed1.AddAttribute("Location", 1);
+            seed2.AddAttribute("Location", 10);
+
+            var bestSeed = bestSeedFinder.FindBest(new [] { seed1, seed2 });
+
+            Assert.That(bestSeed, Is.EqualTo(seed1));
+        }
     }
 }
