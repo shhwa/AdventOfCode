@@ -13,7 +13,7 @@ namespace AdventOfCode.Day5
             maps.ToList().ForEach(m => {
                 var inputValue = seed.GetAttributeValue(m.AttributeToRead);
 
-                var range = m.ranges.SingleOrDefault(r => r.source <= inputValue && r.source + r.length >= inputValue);
+                var range = m.ranges.SingleOrDefault(r => r.source <= inputValue && r.source + r.length > inputValue);
                 var output = range == null ? inputValue : range.destination - range.source + inputValue;
 
                 seed.AddAttribute(m.AttributeToOutput, output);

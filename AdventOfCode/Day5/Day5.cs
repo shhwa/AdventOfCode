@@ -55,8 +55,8 @@ namespace AdventOfCode.Day5
             var seed1 = new Seed(1);
             var seed2 = new Seed(2);
 
-            seed1.AddAttribute("Location", 1);
-            seed2.AddAttribute("Location", 10);
+            seed1.AddAttribute("location", 1);
+            seed2.AddAttribute("location", 10);
 
             var bestSeed = bestSeedFinder.FindBest(new [] { seed1, seed2 });
 
@@ -115,5 +115,53 @@ first-to-second map:
             Assert.That(seed.GetAttributeValue("first"), Is.EqualTo(2));
             Assert.That(seed.GetAttributeValue("second"), Is.EqualTo(3));
         }
+
+        [Test]
+        public void Part1Example()
+        {
+            SeedSelector seedSelector = new SeedSelector(
+                new SeedReader(),
+                new SeedAttributer(),
+                new ClosestSeedFinder()
+            );
+
+            var seed = seedSelector.Select(Par1ExampleSeedData, Part1ExampleAttributeData);
+
+            Assert.That(seed.GetAttributeValue("seed"), Is.EqualTo(13));
+        }
+
+        private string Par1ExampleSeedData = "seeds: 79 14 55 13";
+
+        private string Part1ExampleAttributeData = @"seed-to-soil map:
+50 98 2
+52 50 48
+
+soil-to-fertilizer map:
+0 15 37
+37 52 2
+39 0 15
+
+fertilizer-to-water map:
+49 53 8
+0 11 42
+42 0 7
+57 7 4
+
+water-to-light map:
+88 18 7
+18 25 70
+
+light-to-temperature map:
+45 77 23
+81 45 19
+68 64 13
+
+temperature-to-humidity map:
+0 69 1
+1 0 69
+
+humidity-to-location map:
+60 56 37
+56 93 4";
     }
 }

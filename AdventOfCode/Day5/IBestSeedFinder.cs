@@ -12,7 +12,7 @@ namespace AdventOfCode.Day5
         public Seed FindBest(IEnumerable<Seed> seeds)
         {
             return seeds
-                .OrderBy(seed => seed.GetAttributeValue("Location"))
+                .OrderBy(seed => seed.GetAttributeValue("location"))
                 .First();
         }
     }
