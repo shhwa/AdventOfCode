@@ -15,7 +15,7 @@ namespace AdventOfCode.Day5
             var AttributeToOutput = Regex.Match(header, @"-to-(\w+)").Groups[1].Value;
 
             var ranges = parts.Skip(1).Select(p => {
-                var rangeParts = p.Split(" ").Select(x => int.Parse(x)).ToList();
+                var rangeParts = p.Split(" ").Select(x => long.Parse(x)).ToList();
 
                 return new Range(rangeParts[1], rangeParts[0], rangeParts[2]);
             });
@@ -24,5 +24,5 @@ namespace AdventOfCode.Day5
         }
     }
 
-    public record Range (int source, int destination, int length);
+    public record Range (long source, long destination, long length);
 }

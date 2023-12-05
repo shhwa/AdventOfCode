@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace AdventOfCode.Day5
 {
     public interface ISeedReader
@@ -12,7 +14,7 @@ namespace AdventOfCode.Day5
             return seedInput
                 .Replace("seeds: ", "")
                 .Split(" ")
-                .Select(x => new Seed(int.Parse(x)));
+                .Select(x => new Seed(long.Parse(x)));
         }
     }
 }
